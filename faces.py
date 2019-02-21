@@ -5,7 +5,7 @@ from PIL import Image
 import pickle
 
 # Specify the Classifier for the Cascade
-face_cascade = cv2.CascadeClassifier('../Cascades/data/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('./Cascades/data/haarcascade_frontalface_default.xml')
 
 # Initialize the recognizer
 recognizer = cv2.face.LBPHFaceRecognizer_create()
@@ -54,9 +54,9 @@ while(True):
 			cv2.putText(frame, text, (x, y), font, font_size, color, stroke, cv2.LINE_AA)
 			cv2.putText(frame, str(round(conf, 3)), (x, int(y+h+20)), font, font_size, color, stroke, cv2.LINE_AA)
 
-		# Save picture of cropped face in a file called "my-image.png"
-		img_item = "my-image.png"
-		cv2.imwrite(img_item, roi_color)
+		# # Save picture of cropped face in a file called "my-image.png"
+		# img_item = "my-image.png"
+		# cv2.imwrite(img_item, roi_color)
 
 		# Draw Rectangle around face
 		color = (255, 255, 0) # BGR -> cyan

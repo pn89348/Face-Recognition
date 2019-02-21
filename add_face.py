@@ -13,7 +13,7 @@ else:
 	print("Succesfully created folder %s!" % directory)
 
 # Specify the Classifier for the Cascade
-face_cascade = cv2.CascadeClassifier('../Cascades/data/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('./Cascades/data/haarcascade_frontalface_default.xml')
 
 # Start Capturing Video from Default Webcam
 cap = cv2.VideoCapture(0)
@@ -56,8 +56,8 @@ while(True):
 	# Display the resulting frame
 	cv2.imshow('frame', frame)
 
-	# Stop if user presses 'q' or 50 pictures have been taken
-	if (cv2.waitKey(20) & 0xFF == ord('q')) or count == num_pics:
+	# Stop if user presses 'q' or specified numebr of pictures have been taken
+	if (cv2.waitKey(20) & 0xFF == ord('q')) or count >= num_pics:
 		break
 
 # Stop getting webcam input and close all windows at the end of the program
