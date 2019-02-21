@@ -9,10 +9,10 @@ face_cascade = cv2.CascadeClassifier('./Cascades/data/haarcascade_frontalface_de
 
 # Initialize the recognizer
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read("trainer.yml")
+recognizer.read("../trainer.yml")
 
 labels = {}
-with open("labels.pickle", 'rb') as f:
+with open("../labels.pickle", 'rb') as f:
 	# Load File
 	labels = pickle.load(f)
 	

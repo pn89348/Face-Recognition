@@ -64,7 +64,7 @@ while(True):
 cap.release()
 cv2.destroyAllWindows()
 
-if count == num_pics:
+if count >= num_pics:
 	print("Face Data Collection Complete")
 else:
 	print("Canceled")
