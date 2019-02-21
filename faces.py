@@ -1,3 +1,5 @@
+# This is the main program. It identifies the faces live from the webcam.
+
 # Import Libraries
 import cv2
 import numpy as np

@@ -1,3 +1,5 @@
+# This program will take a specified number of pictures of a person and store it.
+
 # Import Libraries
 import cv2
 import os

@@ -1,3 +1,5 @@
+# This program will train on each of the people that have data in the Images folder.
+
 # Import Libraries
 import cv2
 import os
