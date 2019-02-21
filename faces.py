@@ -44,9 +44,9 @@ while(True):
 		roi_gray = np.array(img, "uint8")
 
 		# Recognize
-		id_, conf = recognizer.predict(roi_gray)
-		if conf <= 95:
-			print(labels[id_], "\t", conf)
+		id_, loss = recognizer.predict(roi_gray)
+		if loss <= 95:
+			print(labels[id_], "\t", loss)
 
 			font = cv2.FONT_HERSHEY_SIMPLEX
 			font_size = 0.75
@@ -54,7 +54,7 @@ while(True):
 			color = (0, 0, 255)
 			stroke = 2
 			cv2.putText(frame, text, (x, y), font, font_size, color, stroke, cv2.LINE_AA)
-			cv2.putText(frame, str(round(conf, 3)), (x, int(y+h+20)), font, font_size, color, stroke, cv2.LINE_AA)
+			cv2.putText(frame, str(round(loss, 3)), (x, int(y+h+20)), font, font_size, color, stroke, cv2.LINE_AA)
 
 		# # Save picture of cropped face in a file called "my-image.png"
 		# img_item = "my-image.png"
