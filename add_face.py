@@ -28,9 +28,6 @@ font_size = 0.75
 white = (255, 255, 255)
 cyan = (255, 255, 0)
 red = (0, 0, 255)
-stroke1 = 1
-stroke2 = 2
-stroke3 = 3
 
 while(True):
 	# Capture frame-by-frame
@@ -47,7 +44,7 @@ while(True):
 	# Give Message if No Faces are Detected
 	if num_faces == 0:
 		text = "No Faces Detected. Training Paused Temporarily."
-		cv2.putText(frame, text, (0, 20), font, font_size, red, stroke2, cv2.LINE_AA)
+		cv2.putText(frame, text, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
 
 	for (x, y, w, h) in faces:
 		roi_gray = gray[y:y+h, x:x+w]
@@ -60,16 +57,16 @@ while(True):
 			cv2.imwrite(file, roi_color)
 		else:
 			text = str(num_faces) + " Faces Detected. Training Paused Temporarily."
-			cv2.putText(frame, text, (0, 20), font, font_size, red, stroke2, cv2.LINE_AA)
+			cv2.putText(frame, text, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
 
 		# Display count
 		text = str(count) + "/" + str(num_pics)
-		cv2.putText(frame, text, (x, y), font, font_size, white, stroke2, cv2.LINE_AA)
+		cv2.putText(frame, text, (x, y), font, font_size, white, 2, cv2.LINE_AA)
 
 		# Draw Rectangle around face
 		x_end = x + w
 		y_end = y + h
-		cv2.rectangle(frame, (x, y), (x_end, y_end), cyan, stroke3)
+		cv2.rectangle(frame, (x, y), (x_end, y_end), cyan, 3)
 	
 
 	# Display the resulting frame
