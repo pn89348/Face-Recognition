@@ -4,13 +4,14 @@
 import cv2
 import os
 
-directory = input("Enter your name: ").title().replace(" ", "-")
+name = input("Enter your name: ").title()
+directory = name.replace(" ", "-")
 directory = "../Images/" + directory
 
 try:
 	os.mkdir(directory)
 except FileExistsError:
-	print("The folder %s already exists! Continuing program." % directory)
+	print("The folder %s already exists! Overwriting." % directory)
 else:
 	print("Succesfully created folder %s!" % directory)
 
@@ -43,21 +44,26 @@ while(True):
 
 	# Give Message if No Faces are Detected
 	if num_faces == 0:
-		text = "No Faces Detected. Training Paused Temporarily."
-		cv2.putText(frame, text, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
+		text1 = "No Face Detected!"
+		text2 = "Please make sure " + name + " is in frame."
+		cv2.putText(frame, text1, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
+		cv2.putText(frame, text2, (0, 40), font, font_size, red, 2, cv2.LINE_AA)
 
 	for (x, y, w, h) in faces:
 		roi_gray = gray[y:y+h, x:x+w]
 		roi_color = frame[y:y+h, x:x+h]
 
-		# Pause Data Collection if Multiple Faces are Detected
+		# Give Message and Pause Data Collection if Multiple Faces are Detected
 		if num_faces == 1:
 			count += 1
 			file = directory + "/" + str(count) + ".png"
 			cv2.imwrite(file, roi_color)
 		else:
-			text = str(num_faces) + " Faces Detected. Training Paused Temporarily."
-			cv2.putText(frame, text, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
+			text1 = str(num_faces) + " Faces Detected! Data Collection Paused."
+			text2 = "Please make sure only " + name + " is in frame."
+			cv2.putText(frame, text1, (0, 20), font, font_size, red, 2, cv2.LINE_AA)
+			cv2.putText(frame, text2, (0, 40), font, font_size, red, 2, cv2.LINE_AA)
+
 
 		# Display count
 		text = str(count) + "/" + str(num_pics)
