@@ -23,6 +23,15 @@ cap = cv2.VideoCapture(0)
 count = 0
 num_pics = 100
 
+font = cv2.FONT_HERSHEY_SIMPLEX
+font_size = 0.75
+white = (255, 255, 255)
+cyan = (255, 255, 0)
+red = (0, 0, 255)
+stroke1 = 1
+stroke2 = 2
+stroke3 = 3
+
 while(True):
 	# Capture frame-by-frame
 	ret, frame = cap.read()
@@ -32,28 +41,36 @@ while(True):
 
 	# Finding Faces
 	faces = face_cascade.detectMultiScale(gray)
+
+	num_faces = len(faces)
+
+	# Give Message if No Faces are Detected
+	if num_faces == 0:
+		text = "No Faces Detected. Training Paused Temporarily."
+		cv2.putText(frame, text, (0, 20), font, font_size, red, stroke2, cv2.LINE_AA)
+
 	for (x, y, w, h) in faces:
 		roi_gray = gray[y:y+h, x:x+w]
 		roi_color = frame[y:y+h, x:x+h]
 
-		count += 1
-		file = directory + "/" + str(count) + ".png"
-		cv2.imwrite(file, roi_color)
+		# Pause Data Collection if Multiple Faces are Detected
+		if num_faces == 1:
+			count += 1
+			file = directory + "/" + str(count) + ".png"
+			cv2.imwrite(file, roi_color)
+		else:
+			text = str(num_faces) + " Faces Detected. Training Paused Temporarily."
+			cv2.putText(frame, text, (0, 20), font, font_size, red, stroke2, cv2.LINE_AA)
 
 		# Display count
-		font = cv2.FONT_HERSHEY_SIMPLEX
-		font_size = 0.75
 		text = str(count) + "/" + str(num_pics)
-		color = (255, 255, 255)
-		stroke = 2
-		cv2.putText(frame, text, (x, y), font, font_size, color, stroke, cv2.LINE_AA)
+		cv2.putText(frame, text, (x, y), font, font_size, white, stroke2, cv2.LINE_AA)
 
 		# Draw Rectangle around face
-		color = (255, 255, 0) # BGR -> cyan
-		stroke = 3
 		x_end = x + w
 		y_end = y + h
-		cv2.rectangle(frame, (x, y), (x_end, y_end), color, stroke)
+		cv2.rectangle(frame, (x, y), (x_end, y_end), cyan, stroke3)
+	
 
 	# Display the resulting frame
 	cv2.imshow('frame', frame)
