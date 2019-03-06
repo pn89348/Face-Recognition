@@ -6,6 +6,9 @@ import os
 import numpy as np
 from PIL import Image
 import pickle
+import time
+
+start_time = time.time()
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__)) # the program's directory
 image_dir = os.path.join(BASE_DIR, "../Images") # the Images folder
@@ -53,3 +56,7 @@ with open("../labels.pickle", 'wb') as f:
 
 recognizer.train(x_train, np.array(y_labels))
 recognizer.save("../trainer.yml")
+
+end_time = time.time()
+total_time = end_time - start_time
+print("Successfully Trained in %f seconds" % total_time)
