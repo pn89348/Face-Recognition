@@ -3,6 +3,7 @@
 # Import Libraries
 import cv2
 import os
+import time
 
 name = input("Enter your name: ").title()
 directory = name.replace(" ", "-")
@@ -17,6 +18,7 @@ else:
 
 # Specify the Classifier for the Cascade
 face_cascade = cv2.CascadeClassifier('./Cascades/data/haarcascade_frontalface_default.xml')
+start_time = time.time()
 
 # Start Capturing Video from Default Webcam
 cap = cv2.VideoCapture(0)
@@ -90,3 +92,7 @@ if count >= num_pics:
 	print("Face Data Collection Complete")
 else:
 	print("Canceled")
+
+end_time = time.time()
+total_time = end_time - start_time
+print("Program complete in %f seconds" % total_time)
