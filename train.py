@@ -33,10 +33,10 @@ for root, dirs, files in os.walk(image_dir):
 				current_id += 1
 			id_ = label_ids[label]
 			# print(label_ids)
-			
+
 			# y_labels.append(label)
 			# x_train.append(path)
-			
+
 			pil_image = Image.open(path).convert("L") # grayscale
 			size = (100, 100)
 			final_image = pil_image.resize(size, Image.ANTIALIAS)
