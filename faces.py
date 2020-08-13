@@ -5,8 +5,12 @@ import cv2
 import numpy as np
 import pickle
 from PIL import Image
-import pyscreenshot as ImageGrab # LINUX
-# from PIL import ImageGrab # WINDOWS/MAC
+import platform
+if platform.system() == "Windows" or platform.system() == "Darwin":
+	from PIL import ImageGrab # WINDOWS/MAC
+else:
+	import pyscreenshot as ImageGrab # LINUX
+
 
 # Function to process frame
 def process_frame(frame):

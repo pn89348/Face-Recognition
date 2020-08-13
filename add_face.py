@@ -5,8 +5,11 @@ import cv2
 import os
 import time
 import numpy as np
-import pyscreenshot as ImageGrab # LINUX
-# from PIL import ImageGrab # WINDOWS/MAC
+import platform
+if platform.system() == "Windows" or platform.system() == "Darwin":
+	from PIL import ImageGrab # WINDOWS/MAC
+else:
+	import pyscreenshot as ImageGrab # LINUX
 
 count = 0
 
